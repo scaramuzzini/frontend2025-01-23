@@ -17,23 +17,22 @@ function Tabuleiro() {
     const [quadrados,setQuadrados] = useState(Array(9).fill(''))
     const [vezDoX, setVezDoX] = useState(true)
     let msg = '';
-    if (vezDoX) {
-        msg = 'Vez do jogador X';
+    let vencedor = verificaVencedor(quadrados);
+    if (vencedor) {
+        msg = `O vencedor é ${vencedor}`
     } else {
-        msg = 'Vez do jogador O';
+        if (vezDoX) {
+            msg = 'Vez do jogador X';
+        } else {
+            msg = 'Vez do jogador O';
+        }
     }
-
-    function verificaVencedor() {
-        if (quadrados[0] == quadrados[1] 
-            && quadrados[1] == quadrados[2]
-            && quadrados[0] != '') {
-                console.log('Temos um vencedor!!!');
-                return true;
-            } 
-        return false;
-    }
-
+    
     function handleClickQuadrado(i) {
+        if (verificaVencedor(quadrados)) {
+            msg = 'Temos um vencedor!!!';
+            return;
+        }
         console.log(i);
         
         if (quadrados[i] == '') {
@@ -47,9 +46,7 @@ function Tabuleiro() {
                 setVezDoX(true);
             }
             setQuadrados(quadradosCopia);
-            if (verificaVencedor()) {
-                msg = 'Temos um vencedor!!!';
-            }
+            
         }
     }
 
@@ -71,4 +68,14 @@ function Tabuleiro() {
         <Quadrado valor={quadrados[8]} handleClick={() => handleClickQuadrado(8)}/>
     </div>
     </>
+}
+
+function verificaVencedor(quadrados) {
+    if (quadrados[0] == quadrados[1] 
+        && quadrados[1] == quadrados[2]
+        && quadrados[0] != '') {
+            console.log('Temos um vencedor!!!');
+            return quadrados[0];
+        } 
+    return null;
 }
