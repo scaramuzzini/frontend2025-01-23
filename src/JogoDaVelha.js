@@ -23,8 +23,34 @@ function Tabuleiro() {
         msg = 'Vez do jogador O';
     }
 
+    function verificaVencedor() {
+        if (quadrados[0] == quadrados[1] 
+            && quadrados[1] == quadrados[2]
+            && quadrados[0] != '') {
+                console.log('Temos um vencedor!!!');
+                return true;
+            } 
+        return false;
+    }
+
     function handleClickQuadrado(i) {
         console.log(i);
+        
+        if (quadrados[i] == '') {
+            console.log(quadrados[i]);
+            const quadradosCopia = quadrados.slice();
+            if (vezDoX) {
+                quadradosCopia[i] = 'X'; 
+                setVezDoX(false);
+            } else {
+                quadradosCopia[i] = 'O';
+                setVezDoX(true);
+            }
+            setQuadrados(quadradosCopia);
+            if (verificaVencedor()) {
+                msg = 'Temos um vencedor!!!';
+            }
+        }
     }
 
     return <>
