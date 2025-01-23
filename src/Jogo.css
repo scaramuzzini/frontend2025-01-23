@@ -1,0 +1,12 @@
+.q {
+    background-color: white;
+    font-size: 48px;
+    width: 100px;
+    height: 100px;
+    border:0.1;
+}
+
+.linha {
+    display: flex;
+}
+
