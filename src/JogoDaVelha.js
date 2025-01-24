@@ -50,8 +50,14 @@ function Tabuleiro() {
         }
     }
 
+    function reiniciarJogo() {
+        setQuadrados(Array(9).fill(''));
+        setVezDoX(true);
+    }
+
     return <>
     <p>{msg}</p>
+    <button onClick={reiniciarJogo}>Reiniciar jogo</button>
     <div className="linha">
         <Quadrado valor={quadrados[0]} handleClick={() => handleClickQuadrado(0)}/>
         <Quadrado valor={quadrados[1]} handleClick={() => handleClickQuadrado(1)}/>
@@ -109,3 +115,4 @@ function verificaVencedor(quadrados) {
     }
     return null;
 }
+
