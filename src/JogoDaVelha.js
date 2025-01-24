@@ -71,11 +71,41 @@ function Tabuleiro() {
 }
 
 function verificaVencedor(quadrados) {
-    if (quadrados[0] == quadrados[1] 
-        && quadrados[1] == quadrados[2]
-        && quadrados[0] != '') {
-            console.log('Temos um vencedor!!!');
-            return quadrados[0];
-        } 
+    /*
+        0 1 2
+        3 4 5
+        6 7 8
+    */ 
+   /*
+       00 01 02
+       10 11 12
+       20 21 22 dp i == j ds i + j == len-1
+   */
+
+       const combinacoesVencedoras = [
+        // linhas
+        [0, 1, 2], //linha1
+        [3, 4, 5], //linha2
+        [6, 7, 8], //linha3
+
+        //colunas
+        [0, 3, 6],
+        [1, 4, 7],
+        [2, 5, 8],
+
+        //dp e ds
+        [0, 4, 8],
+        [6, 4, 2]
+    ]
+
+    for (let i=0; i < combinacoesVencedoras.length; i++) {
+        const [p1,p2,p3] = combinacoesVencedoras[i];
+        if (quadrados[p1] && 
+            quadrados[p1] == quadrados[p2] &&
+            quadrados[p2] == quadrados[p3]) { 
+    
+                return quadrados[p1];
+        }
+    }
     return null;
 }
